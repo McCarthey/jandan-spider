@@ -9,6 +9,21 @@ var url = "http://jandan.net/ooxx/page-" + index + "#comments";
 var pageMax = 10;
 //每页爬取的图片数
 var imgMax = 10;
+//创建image文件夹存图片
+fs.exists('./image', function(exists) {
+	if (exists) {
+		getImages();
+	} else {
+		fs.mkdir('./image', function(err) {
+			if (err) {
+				console.error(err);
+			}
+			console.log('创建目录成功');
+			getImages();
+		});
+	}
+})
+
 
 function startRequest(url) {
 	http.get(url, function(res) {
@@ -35,8 +50,11 @@ function startRequest(url) {
 		});
 	});
 }
-while (index < pageMax) {
-	let url = "http://jandan.net/ooxx/page-" + index + "#comments";
-	startRequest(url);
-	index++;
+
+function getImages() {
+	while (index < pageMax) {
+		let url = "http://jandan.net/ooxx/page-" + index + "#comments";
+		startRequest(url);
+		index++;
+	}
 }
