@@ -1,4 +1,5 @@
 # jandan-spider
 
 cd jandan-spider
-node first-speder.js
+
+node first-spider.js
